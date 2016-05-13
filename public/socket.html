@@ -5,9 +5,15 @@
     <title></title>
     <script src="js/jq/jquery.min.js"></script>
     <script src="js/jq/socket.io.js"></script>
+    <script src="js/data.js"></script>
     <script>
-        io.connect().on('message',function(count){
-            $('body').html(count);
+        $(function(){
+            $('body').html(b);
+        });
+        io.connect('http://localhost').on('script',function(path){
+            $('#script_a').remove();
+            $('head').append('<script id="script_a" scr="'+path + '"></scr'+'ipt>');
+            $('body').html(b);
         })
     </script>
 </head>
