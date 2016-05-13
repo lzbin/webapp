@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jq/jquery.min.js"></script>
+    <script src="js/jq/socket.io.js"></script>
+    <script>
+        io.connect().on('message',function(count){
+            $('body').html(count);
+        })
+    </script>
+</head>
+<body>
+    Loading...
+</body>
+</html>
