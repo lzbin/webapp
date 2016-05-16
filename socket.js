@@ -6,6 +6,7 @@
 'use strict';
 var setWatch,
     http = require('http'),
+    fs = require('fs'),
     express = require('express'),
     socketIo = require('socket.io'),
     fsHandle = require('fs'),
@@ -27,7 +28,13 @@ setWatch = function( url_path,file_type){
                 console.log('file accessed');
                 if(current.mtime !== previous.mtime){
                     console.log('file changed');
-                    io.seckets.emit(file_type,url_path);
+                    /*fs.readFile(__dirname + url_path,{encoding:'utf-8'}, function (error, fileData) {
+                        if (error) {
+                            console.log(error);
+                        }
+                        io.sockets.emit(file_type,fileData);
+                    });*/
+                    io.sockets.emit(file_type,url_path);
                 }
             }
         );
@@ -38,9 +45,9 @@ setWatch = function( url_path,file_type){
 //-----------------------BEGIN SERVER CONFIGURATION---------------------
 app.use(function(request,response,next){
     if(request.url.indexOf('/js/') >= 0 ){
-        setWatch( '/public/' + request.url,'script');
+        setWatch( '/public' + request.url,'script');
     }else if(request.url.indexOf('/css/') >= 0 ){
-        setWatch('/public/' + request.url,'stylesheet');
+        setWatch('/public' + request.url,'stylesheet');
     }
     next();
 });

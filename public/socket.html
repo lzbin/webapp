@@ -10,10 +10,11 @@
         $(function(){
             $('body').html(b);
         });
-        io.connect('http://localhost').on('script',function(path){
+        io.connect('http://localhost:3000').on('script',function(path){
             $('#script_a').remove();
             $('head').append('<script id="script_a" scr="'+path + '"></scr'+'ipt>');
             $('body').html(b);
+            console.log(b);
         })
     </script>
 </head>
