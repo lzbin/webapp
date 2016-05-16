@@ -31,18 +31,6 @@ var env = app.get('env');
 app.use(bodyParser());
 app.use(methodOverride());
 
-app.use(function(req, res, next) {
-    var user = auth(req);
-
-    if (user === undefined || user['name'] !== 'spa' || user['pass'] !== 'spa') {
-        res.statusCode = 401;
-        res.setHeader('WWW-Authenticate', 'Basic realm="MyRealmName"');
-        res.end('Unauthorized');
-    } else {
-        next();
-    }
-});
-
 app.use(express.static(__dirname + '/public'));
 //app.use(app.router);
 
